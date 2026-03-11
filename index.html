@@ -1,897 +1,1123 @@
-<!doctype html>
-<html>
-  <head>
-    <script type="module" src="outageCheck.js"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-59DEK49FXJ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-59DEK49FXJ');
-    </script>
-    <script src="algorithm.js"></script>
-    <script src="console.js"></script>
-    <link rel="icon" type="image/x-icon" href="nbeplogo.png">
-    <title>NBEP-us.com | NATIONAL BUREAU OF EXPLOITATION PROTECTION</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <style>
-      :root {
-        --navy:   #1f2f5a;
-        --gold:   #ffd900;
-        --cream:  #dbd9d3;
-        --black:  #0a0a0a;
-        --warn-orange: #ff8c00;
-      }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The National Bureau of Exploitation Protection is a non-government, non-profit organization dedicated to cybercrime awareness, exploitation reporting, and victim support.">
+  <title>NBEP — National Bureau of Exploitation Protection</title>
 
-      *, *::before, *::after { box-sizing: border-box; }
+  <script type="module" src="outageCheck.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-59DEK49FXJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-59DEK49FXJ');
+  </script>
+  <script src="algorithm.js"></script>
+  <script src="console.js"></script>
 
-      html { overflow-x: hidden; scroll-behavior: smooth; }
+  <link rel="icon" type="image/x-icon" href="nbeplogo.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="nbeplogo.png">
 
-      body {
-        margin: 0;
-        background-color: var(--cream);
-        font-family: 'DM Sans', Arial, sans-serif;
-        overflow-x: hidden;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 
-      /*  TOP BANNER ─────────────────────────────────────── */
-      .banner {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        background-color: #ffffff;
-        border-bottom: 1px solid #e0ddd7;
-        padding: 5px 12px;
-        font-family: 'DM Sans', Arial, sans-serif;
-        font-size: 13px;
-        gap: 6px;
-      }
-      .banner img { height: 1.36em; width: auto; }
-      .banner .img2 { height: 1em; width: 25px; }
-      .banner p { margin: 0; font-weight: 500; color: #333; }
-      .banner .p2 {
-        margin-left: 6px;
-        font-weight: 700;
-        text-decoration: underline;
-        color: #000;
-        transition: color 0.2s;
-      }
-      .banner .p2:hover { color: var(--navy); }
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-      /* ── TOOLBAR ─────────────────────────────────────────── */
-      .toolbar {
-        background-color: var(--black);
-        height: 70px;
-        display: flex;
-        align-items: center;
-        padding: 0 28px;
-        position: relative;
-        width: 100%;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.35);
-      }
+  <style>
+    :root {
+      --navy:        #1f2f5a;
+      --gold:        #ffd900;
+      --cream:       #dbd9d3;
+      --black:       #0a0a0a;
+      --warn-orange: #ff8c00;
+      --text-muted-light: rgba(255,255,255,0.65);
+    }
 
-      .dropdown-logo { position: relative; }
-      .dropdown-logo > img {
-        height: 48px;
-        width: auto;
-        border: 2px solid rgba(255,255,255,0.6);
-        border-radius: 6px;
-        cursor: pointer;
-        transition: border-color 0.2s, box-shadow 0.2s;
-      }
-      .dropdown-logo:hover > img {
-        border-color: var(--gold);
-        box-shadow: 0 0 0 3px rgba(255,217,0,0.18);
-      }
-      .dropdown-menu {
-        display: none;
-        position: absolute;
-        top: calc(100% + 8px);
-        left: 0;
-        background-color: #ffffff;
-        min-width: 210px;
-        border: 1.5px solid #ddd;
-        border-radius: 6px;
-        box-shadow: 0 8px 28px rgba(0,0,0,0.18);
-        overflow: hidden;
-        z-index: 9999;
-        animation: dropIn 0.15s ease;
-      }
-      @keyframes dropIn {
-        from { opacity: 0; transform: translateY(-6px); }
-        to   { opacity: 1; transform: translateY(0); }
-      }
-      .dropdown-menu a {
-        display: block;
-        padding: 12px 16px;
-        text-decoration: none;
-        color: #111;
-        font-weight: 600;
-        font-size: 14px;
-        border-bottom: 1px solid #f0f0f0;
-        transition: background-color 0.15s, color 0.15s;
-      }
-      .dropdown-menu a:last-child { border-bottom: none; }
-      .dropdown-menu a:hover { background-color: #f5f5f5; color: var(--navy); }
-      .dropdown-logo:hover .dropdown-menu { display: block; }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { overflow-x: hidden; scroll-behavior: smooth; }
 
-      .toolbar-nav {
-        display: flex;
-        gap: 52px;
-        margin-left: 52px;
-      }
-      .toolbar-nav a {
-        color: #ffffff;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 14px;
-        letter-spacing: 1.8px;
-        text-transform: uppercase;
-        border-bottom: 2px solid transparent;
-        padding-bottom: 3px;
-        transition: color 0.22s, border-color 0.22s;
-      }
-      .toolbar-nav a:hover {
-        color: var(--gold);
-        border-color: var(--gold);
-      }
+    body {
+      margin: 0;
+      background-color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-      .toolbar-search { margin-left: auto; margin-right: 4px; }
-      .search-box {
-        display: flex;
-        align-items: center;
-        background: #fff;
-        border-radius: 22px;
-        padding: 6px 14px;
-        border: 1.5px solid #ccc;
-        transition: box-shadow 0.2s, border-color 0.2s;
-      }
-      .search-box:focus-within {
-        box-shadow: 0 0 0 3px rgba(255,217,0,0.35);
-        border-color: var(--gold);
-      }
-      .search-box img { width: 15px; height: 15px; margin-right: 8px; opacity: 0.6; }
-      .search-box input {
-        border: none;
-        outline: none;
-        font-size: 13px;
-        width: 185px;
-        font-family: 'DM Sans', Arial, sans-serif;
-        background: transparent;
-      }
+    /* ── TOP BANNER ── */
+    .top-banner {
+      width: 100%;
+      background: #ffffff;
+      border-bottom: 1px solid #e0ddd7;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12.5px;
+    }
+    .top-banner-top {
+      padding: 5px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .top-banner-top img { height: 1.3em; width: auto; }
+    .top-banner-top .flag { height: 1em; width: 25px; }
+    .top-banner-top p { margin: 0; font-weight: 500; color: #333; }
+    .top-banner-top a {
+      margin-left: 5px;
+      font-weight: 700;
+      text-decoration: underline;
+      color: #000;
+      transition: color 0.2s;
+    }
+    .top-banner-top a:hover { color: var(--navy); }
 
-      /* ── HOME BANNER ─────────────────────────────────────── */
-      .home-banner {
-        width: 100%;
-        min-height: 280px;
-        background-image: url("worldmapbanner2.png");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 30px 20px;
-        position: relative;
-      }
-      .home-banner::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to bottom, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.52) 100%);
-        pointer-events: none;
-      }
-      .home-banner-content {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .home-banner-text h2 {
-        color: #fff;
-        font-family: 'EB Garamond', Georgia, serif;
-        font-size: 2.4rem;
-        font-weight: 700;
-        margin: 0;
-        text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        letter-spacing: 0.5px;
-      }
-      .home-banner-text h4 {
-        color: rgba(255,255,255,0.88);
-        font-family: 'DM Sans', Arial, sans-serif;
-        font-size: 1.1rem;
-        font-weight: 400;
-        margin: 10px 0 0 0;
-        letter-spacing: 0.3px;
-      }
-      .home-banner-button {
-        margin-top: 50px;
-        font-size: 1rem;
-        font-family: 'DM Sans', Arial, sans-serif;
-        font-weight: 600;
-        color: var(--navy);
-        background-color: #a6e1ff;
-        border: 2px solid rgba(255,255,255,0.8);
-        border-radius: 6px;
-        padding: 10px 22px;
-        cursor: pointer;
-        transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
-        letter-spacing: 0.4px;
-      }
-      .home-banner-button:hover {
-        background-color: #7ecfff;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 18px rgba(0,0,0,0.2);
-      }
-      .home-banner-resources {
-        margin-top: 14px;
-        font-size: 1rem;
-        font-weight: 600;
-        color: #fff;
-        text-decoration: none;
-        letter-spacing: 0.3px;
-        transition: color 0.22s;
-        border-bottom: 1px solid transparent;
-      }
-      .home-banner-resources:hover {
-        color: var(--gold);
-        border-bottom-color: var(--gold);
-      }
+    .top-banner-bottom {
+      display: none;
+      padding: 10px 20px;
+      gap: 40px;
+      background: #f5f5f5;
+      border-top: 1px solid #ddd;
+    }
+    .top-banner-bottom.open { display: flex; }
+    .top-banner-bottom .left,
+    .top-banner-bottom .right {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      flex: 1;
+    }
+    .top-banner-bottom img { width: 32px; margin-top: 2px; }
+    .top-banner-bottom h5 { font-size: 13px; font-weight: 700; margin: 0 0 3px; }
+    .top-banner-bottom p { font-size: 12px; margin: 0; color: #444; }
+    .lnk-official-us-site {
+      cursor: pointer;
+      color: #333;
+      text-decoration: none;
+    }
+    .lnk-official-us-site:hover { text-decoration: underline; color: var(--navy); }
 
-      /* ── DISCLAIMER ──────────────────────────────────────── */
-      .home-warn {
-        display: flex;
-        align-items: flex-start;
-        gap: 14px;
-        margin: 28px auto;
-        max-width: 1200px;
-        background-color: #fff7e6;
-        border-left: 5px solid var(--warn-orange);
-        border-radius: 8px;
-        padding: 16px 20px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.07);
-      }
-      .home-warn h3 {
-        margin: 0 0 5px 0;
-        color: var(--warn-orange);
-        font-size: 1.1rem;
-        font-weight: 700;
-        font-family: 'DM Sans', Arial, sans-serif;
-      }
-      .home-warn p {
-        margin: 0;
-        font-size: 0.95rem;
-        line-height: 1.6;
-        color: #444;
-      }
-      .warn-icon {
-        background: var(--warn-orange);
-        color: white;
-        width: 26px;
-        height: 26px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        flex-shrink: 0;
-        font-size: 15px;
-        margin-top: 2px;
-      }
+    /* ── HEADER ── */
+    header {
+      background-color: var(--black);
+      color: white;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.4);
+    }
+    .header-mobile-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+    }
+    @media (min-width: 992px) { .header-mobile-row { display: none; } }
+    .header-mobile-fbi {
+      font-family: 'EB Garamond', serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+    .header-top-row { display: none; }
+    @media (min-width: 992px) { .header-top-row { display: block; } }
 
-      /* ── CUSTOM CONTEXT MENU ─────────────────────────────── */
-      .custom-context-menu {
-        display: none;
-        position: fixed;
-        z-index: 99999;
-        background-color: #fffef0;
-        border: 1.5px solid #000;
-        border-radius: 4px;
-        min-width: 180px;
-        box-shadow: 3px 3px 0 #000;
-        font-family: 'DM Sans', Arial, sans-serif;
-        overflow: hidden;
-      }
-      .custom-context-menu a {
-        display: block;
-        padding: 11px 15px;
-        text-decoration: none;
-        color: #111;
-        font-weight: 600;
-        font-size: 14px;
-        border-bottom: 1px solid #e8e6d8;
-        transition: background-color 0.1s;
-      }
-      .custom-context-menu a:last-child { border-bottom: none; }
-      .custom-context-menu a:hover { background-color: #f0eedc; }
+    .search-box { display: flex; align-items: center; }
+    .search-box input {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: white;
+      border-radius: 4px 0 0 4px;
+      font-size: 13px;
+      padding: 5px 10px;
+      outline: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .search-box input::placeholder { color: rgba(255,255,255,0.5); }
+    .search-box input:focus {
+      background: rgba(255,255,255,0.15);
+      border-color: var(--gold);
+    }
+    .search-box button {
+      border-radius: 0 4px 4px 0;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-left: none;
+      padding: 5px 10px;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      transition: background 0.2s;
+    }
+    .search-box button:hover { background: rgba(255,255,255,0.18); }
 
-      /* ── VISTA DIALOG ────────────────────────────────────── */
-      .vista-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.48);
-        z-index: 999998;
-        backdrop-filter: blur(2px);
-      }
-      .vista-window {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0.97);
-        width: 490px;
-        z-index: 999999;
-        border-radius: 10px 10px 6px 6px;
-        box-shadow:
-          0 0 0 1px #4a6fa5,
-          0 0 0 2px #1a3a6b,
-          0 12px 40px rgba(0,0,0,0.55);
-        overflow: hidden;
-        font-family: 'DM Sans', "Segoe UI", Tahoma, Arial, sans-serif;
-        transition: transform 0.18s ease, opacity 0.18s ease;
-        opacity: 0;
-      }
-      .vista-window.open {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
-      }
-      .vista-titlebar {
-        background: linear-gradient(180deg, #4a90d9 0%, #2a6bbf 40%, #1a52a0 60%, #2a6bbf 100%);
-        padding: 7px 12px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border-bottom: 1px solid #1a3a6b;
-      }
-      .vista-titlebar-left { display: flex; align-items: center; gap: 7px; }
-      .vista-titlebar-icon {
-        width: 16px; height: 16px;
-        background: radial-gradient(circle at 35% 35%, #fff, #4a90d9);
-        border-radius: 50%;
-        border: 1px solid rgba(255,255,255,0.4);
-      }
-      .vista-titlebar-text {
-        color: white;
-        font-size: 13px;
-        font-weight: 600;
-        text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-        letter-spacing: 0.3px;
-      }
-      .vista-close {
-        width: 22px; height: 22px;
-        border-radius: 50%;
-        border: 1px solid #8b1a1a;
-        background: radial-gradient(circle at 40% 30%, #ff6b6b, #cc0000 60%, #8b0000);
-        color: white;
-        font-size: 11px;
-        font-weight: bold;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: inset 0 1px 1px rgba(255,255,255,0.3);
-        transition: filter 0.15s;
-        border: none;
-      }
-      .vista-close:hover { filter: brightness(1.25); }
-      .vista-body { background: linear-gradient(180deg, #f0f4fb 0%, #dce6f5 100%); }
-      .vista-content { padding: 20px 22px 16px; border-bottom: 1px solid #b8cce4; }
-      .vista-content-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
-      .vista-content-icon {
-        width: 48px; height: 48px; flex-shrink: 0;
-        background: radial-gradient(circle at 35% 30%, #fff, #4a90d9 50%, #1a52a0);
-        border-radius: 8px;
-        border: 1px solid #4a6fa5;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-        display: flex; align-items: center; justify-content: center;
-        font-size: 26px;
-      }
-      .vista-content-title { font-size: 16px; font-weight: 700; color: #1a3a6b; }
-      .vista-content-subtitle { font-size: 12px; color: #4a6fa5; margin-top: 2px; }
-      .vista-content p { font-size: 13px; color: #222; line-height: 1.6; margin: 0 0 10px; }
-      .vista-content ul { margin: 0 0 10px; padding-left: 20px; }
-      .vista-content ul li { font-size: 13px; color: #222; line-height: 1.8; }
-      .vista-footer {
-        background: linear-gradient(180deg, #dce6f5 0%, #c8d8ee 100%);
-        padding: 10px 22px;
-        display: flex;
-        justify-content: flex-end;
-        gap: 8px;
-        border-top: 1px solid #b8cce4;
-      }
-      .vista-btn {
-        padding: 5px 18px;
-        font-size: 13px;
-        font-family: 'DM Sans', "Segoe UI", Arial, sans-serif;
-        border-radius: 4px;
-        cursor: pointer;
-        border: 1px solid #4a6fa5;
-        background: linear-gradient(180deg, #f0f6ff 0%, #d0e4f8 50%, #b8d0f0 51%, #cce0ff 100%);
-        color: #1a3a6b;
-        font-weight: 600;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), 0 1px 2px rgba(0,0,0,0.15);
-        transition: filter 0.15s;
-      }
-      .vista-btn:hover { filter: brightness(1.08); }
-      .vista-btn-primary {
-        border-color: #1a3a6b;
-        background: linear-gradient(180deg, #4a90d9 0%, #2a6bbf 50%, #1a52a0 51%, #2a70cc 100%);
-        color: white;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 1px 2px rgba(0,0,0,0.3);
-      }
+    .social-icons a { font-size: 18px; transition: color 0.2s; }
+    .social-icons a:hover { color: var(--gold) !important; }
 
-      /* ── LEADERSHIP ──────────────────────────────────────── */
-      .leadership-section {
-        text-align: center;
-        margin: 48px auto;
-        padding: 0 20px;
-      }
-      .leadership-text {
-        font-family: 'EB Garamond', "Times New Roman", serif;
-        color: var(--navy);
-        font-size: 32px;
-        margin-bottom: 24px;
-        letter-spacing: 0.3px;
-      }
-      .leadership-images {
-        display: flex;
-        justify-content: center;
-        gap: 18px;
-        flex-wrap: wrap;
-      }
-      .leader-box {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 200px;
-        background-color: #1e1e1e;
-        border-radius: 8px;
-        padding: 12px;
-        box-shadow: 0 4px 14px rgba(0,0,0,0.18);
-        transition: transform 0.2s, box-shadow 0.2s;
-      }
-      .leader-box:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 22px rgba(0,0,0,0.24);
-      }
-      .leader-box img {
-        width: 160px !important;
-        height: 200px;
-        object-fit: cover;
-        border-radius: 5px;
-      }
-      .leader-name {
-        font-family: 'DM Sans', Arial, sans-serif;
-        color: #eee;
-        font-size: 13px;
-        margin-top: 8px;
-        text-align: center;
-        line-height: 1.4;
-      }
+    .navbar-dark .navbar-nav .nav-link {
+      color: rgba(255,255,255,0.85);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      padding: 10px 14px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .navbar-dark .navbar-nav .nav-link:hover {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+    .nav-link-tip { color: var(--gold) !important; }
+    .nav-link-tip:hover { color: #ffe84d !important; }
 
-      /* ── I WANT TO ───────────────────────────────────────── */
-      .actions-section {
-        background-color: var(--navy);
-        padding: 48px 20px 56px;
-        text-align: center;
-        width: 100%;
-      }
-      .actions-title {
-        font-family: 'EB Garamond', Georgia, serif;
-        font-size: 28px;
-        font-weight: 400;
-        color: #fff;
-        margin: 0 0 38px;
-        letter-spacing: 0.5px;
-      }
-      .actions-buttons {
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 52px;
-        flex-wrap: wrap;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-      .action-btn {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-        width: 100px;
-        cursor: pointer;
-        text-decoration: none;
-        transition: transform 0.2s;
-      }
-      .action-btn:hover { transform: translateY(-3px); }
-      .action-btn img {
-        width: 60px; height: 60px;
-        object-fit: contain;
-        filter: brightness(0) invert(1);
-        opacity: 0.92;
-        transition: opacity 0.2s;
-      }
-      .action-btn:hover img { opacity: 1; }
-      .action-btn a {
-        font-family: 'DM Sans', Arial, sans-serif;
-        font-size: 13px;
-        color: rgba(255,255,255,0.88);
-        text-align: center;
-        line-height: 1.4;
-        text-decoration: none;
-        transition: color 0.2s;
-      }
-      .action-btn:hover a { color: var(--gold); }
+    /* ── OFFCANVAS ── */
+    .offcanvas-body .nav-link { padding: 10px 4px; border-bottom: 1px solid #222; font-size: 14px; }
+    .offcanvas-body .nav-link:hover { color: var(--gold) !important; }
 
-      /* ── FOLDER CARDS ────────────────────────────────────── */
-      .folder-cards {
-        display: flex;
-        gap: 26px;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin: 28px auto;
-        max-width: 1200px;
-        padding: 0 20px;
-      }
-      .folder-card {
-        background-color: #fffef0;
-        border: 2px solid #000;
-        width: 200px;
-        padding: 18px 16px 14px;
-        cursor: pointer;
-        font-family: 'DM Sans', "Segoe UI", Arial, sans-serif;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        user-select: none;
-        box-shadow: 3px 3px 0 #000;
-        transition: background-color 0.1s, transform 0.1s, box-shadow 0.1s;
-        border-radius: 2px;
-      }
-      .folder-card:hover { background-color: #f0eedc; }
-      .folder-card:active {
-        box-shadow: 1px 1px 0 #000;
-        transform: translate(2px, 2px);
-      }
-      .folder-icon { font-size: 52px; line-height: 1; }
-      .folder-icon img { width: 52px; height: 52px; object-fit: contain; }
-      .folder-label {
-        font-size: 13px;
-        font-weight: 700;
-        color: #1a1a1a;
-        text-align: center;
-        letter-spacing: 0.3px;
-      }
+    /* ── HERO ── */
+    .hero-section { position: relative; overflow: hidden; }
+    .hero-carousel { position: relative; min-height: 480px; }
+    @media (max-width: 768px) { .hero-carousel { min-height: 320px; } }
 
-      /* ── FOOTER ──────────────────────────────────────────── */
-      .footer {
-        margin-top: auto;
-        background: var(--black);
-        color: white;
-        width: 100%;
-        padding: 28px 0;
-        font-family: 'DM Sans', Arial, sans-serif;
-      }
-      .footer-inner {
-        width: 92%;
-        margin: auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 30px;
-      }
-      .footer-links { display: flex; flex-direction: column; }
-      .footer-row {
-        display: flex;
-        gap: 16px;
-        padding: 9px 0;
-        border-bottom: 1px solid #2a2a2a;
-        flex-wrap: wrap;
-      }
-      .footer-row:last-child { border-bottom: none; }
-      .footer-btn {
-        text-decoration: none;
-        color: rgba(255,255,255,0.75);
-        font-size: 12px;
-        letter-spacing: 0.7px;
-        padding: 2px 4px;
-        transition: color 0.22s;
-        text-transform: uppercase;
-      }
-      .footer-btn:hover { color: var(--gold); }
-      .footer-social { margin-top: 14px; display: flex; gap: 12px; }
-      .footer-social img {
-        height: 18px; width: 18px;
-        opacity: 0.7;
-        transition: opacity 0.2s, filter 0.2s;
-        filter: brightness(0) invert(1);
-      }
-      .footer-social img:hover { opacity: 1; filter: brightness(0) invert(1) sepia(1) saturate(4) hue-rotate(5deg); }
-      .footer-logo { display: flex; align-items: center; gap: 10px; }
-      .footer-logo-img { height: 100px; width: auto; opacity: 0.9; }
-      .footer-text { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 10px; }
-    </style>
-  </head>
-  <body>
+    .hero-slide {
+      display: none;
+      position: relative;
+      min-height: 480px;
+    }
+    @media (max-width: 768px) { .hero-slide { min-height: 320px; } }
+    .hero-slide.active { display: block; }
 
-    <!-- top banner -->
-    <div class="banner">
-      <img src="nbeplogo.png" alt="logo">
-      <img class="img2" src="usflag.png" alt="US Flag">
-      <p>This is an official site of the NBEP. A non-profit non-government organization.</p>
-      <a class="p2" href="https://sayroahm.github.io/nbep/howyouknow">?</a>
+    .hero-image {
+      position: absolute;
+      inset: 0;
+    }
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.1) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      min-height: 480px;
+      padding: 40px 0;
+    }
+    @media (max-width: 768px) { .hero-content { min-height: 320px; padding: 28px 0; } }
+    .hero-content h2 {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      font-weight: 700;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+      margin-bottom: 12px;
+      max-width: 600px;
+    }
+    .hero-content .lead {
+      font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+      max-width: 520px;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+      opacity: 0.92;
+    }
+    .hero-read-more {
+      display: inline-block;
+      margin-top: 22px;
+      padding: 10px 24px;
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 3px;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .hero-read-more:hover {
+      background: #ffe84d;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+      color: var(--navy);
+    }
+
+    .hero-indicators {
+      z-index: 10;
+    }
+    .indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.7);
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .indicator.active {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    /* ── LEADERSHIP ── */
+    .leadership-section { background-color: var(--cream); }
+    .leadership-section h2 {
+      font-family: 'EB Garamond', serif;
+      color: var(--navy);
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .leadership-card {
+      position: relative;
+      border: none;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.22s, box-shadow 0.22s;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.14);
+    }
+    .leadership-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.22);
+    }
+    .leadership-card img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    .card-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.4) 60%, transparent 100%);
+      padding: 28px 14px 14px;
+      color: white;
+    }
+    .card-overlay h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    /* ── I WANT TO ── */
+    .i-want-to-section { background-color: var(--navy); }
+    .i-want-to-section h2 {
+      font-family: 'EB Garamond', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+    .quick-link { padding: 10px; }
+    .icon-container img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 0.88;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .quick-link:hover .icon-container img {
+      opacity: 1;
+      transform: translateY(-3px);
+    }
+    .quick-link h6 {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+    .quick-link h6 a {
+      color: rgba(255,255,255,0.82);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .quick-link:hover h6 a { color: var(--gold); }
+
+    /* ── FEATURED CONTENT ── */
+    .featured-content-section { background-color: var(--cream); }
+    .featured-content-section h2 {
+      font-family: 'EB Garamond', serif;
+      color: var(--navy);
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    .featured-card {
+      position: relative;
+      border: none;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.22s, box-shadow 0.22s;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    }
+    .featured-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.2);
+    }
+    .featured-card img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+    }
+    .featured-card .card-overlay h3 {
+      font-family: 'EB Garamond', serif;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    /* ── DISCLAIMER ── */
+    .home-warn {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin: 28px auto;
+      max-width: 1200px;
+      background-color: #fff7e6;
+      border-left: 5px solid var(--warn-orange);
+      border-radius: 8px;
+      padding: 16px 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    }
+    .home-warn h3 {
+      margin: 0 0 5px;
+      color: var(--warn-orange);
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+    .home-warn p { margin: 0; font-size: 0.93rem; line-height: 1.6; color: #444; }
+    .warn-icon {
+      background: var(--warn-orange);
+      color: white;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: bold; flex-shrink: 0; font-size: 14px; margin-top: 2px;
+    }
+
+    /* ── VISTA DIALOG ── */
+    .vista-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.48);
+      z-index: 999998;
+      backdrop-filter: blur(2px);
+    }
+    .vista-window {
+      display: none;
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(0.97);
+      width: 490px; max-width: 94vw;
+      z-index: 999999;
+      border-radius: 10px 10px 6px 6px;
+      box-shadow: 0 0 0 1px #4a6fa5, 0 0 0 2px #1a3a6b, 0 12px 40px rgba(0,0,0,0.55);
+      overflow: hidden;
+      font-family: 'DM Sans', "Segoe UI", sans-serif;
+      transition: transform 0.18s ease, opacity 0.18s ease;
+      opacity: 0;
+    }
+    .vista-window.open { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    .vista-titlebar {
+      background: linear-gradient(180deg, #4a90d9 0%, #2a6bbf 40%, #1a52a0 60%, #2a6bbf 100%);
+      padding: 7px 12px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid #1a3a6b;
+    }
+    .vista-titlebar-left { display: flex; align-items: center; gap: 7px; }
+    .vista-titlebar-icon {
+      width: 16px; height: 16px;
+      background: radial-gradient(circle at 35% 35%, #fff, #4a90d9);
+      border-radius: 50%; border: 1px solid rgba(255,255,255,0.4);
+    }
+    .vista-titlebar-text { color: white; font-size: 13px; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+    .vista-close {
+      width: 22px; height: 22px; border-radius: 50%;
+      border: none;
+      background: radial-gradient(circle at 40% 30%, #ff6b6b, #cc0000 60%, #8b0000);
+      color: white; font-size: 11px; font-weight: bold; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: inset 0 1px 1px rgba(255,255,255,0.3);
+      transition: filter 0.15s;
+    }
+    .vista-close:hover { filter: brightness(1.25); }
+    .vista-body { background: linear-gradient(180deg, #f0f4fb 0%, #dce6f5 100%); }
+    .vista-content { padding: 20px 22px 16px; border-bottom: 1px solid #b8cce4; }
+    .vista-content-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .vista-content-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: radial-gradient(circle at 35% 30%, #fff, #4a90d9 50%, #1a52a0);
+      border-radius: 8px; border: 1px solid #4a6fa5;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      display: flex; align-items: center; justify-content: center; font-size: 26px;
+    }
+    .vista-content-title { font-size: 16px; font-weight: 700; color: #1a3a6b; }
+    .vista-content-subtitle { font-size: 12px; color: #4a6fa5; margin-top: 2px; }
+    .vista-content p { font-size: 13px; color: #222; line-height: 1.6; margin: 0 0 10px; }
+    .vista-content ul { margin: 0 0 10px; padding-left: 20px; }
+    .vista-content ul li { font-size: 13px; color: #222; line-height: 1.8; }
+    .vista-footer {
+      background: linear-gradient(180deg, #dce6f5 0%, #c8d8ee 100%);
+      padding: 10px 22px; display: flex; justify-content: flex-end; gap: 8px;
+      border-top: 1px solid #b8cce4;
+    }
+    .vista-btn {
+      padding: 5px 18px; font-size: 13px;
+      font-family: 'DM Sans', sans-serif;
+      border-radius: 4px; cursor: pointer;
+      border: 1px solid #4a6fa5;
+      background: linear-gradient(180deg, #f0f6ff 0%, #d0e4f8 50%, #b8d0f0 51%, #cce0ff 100%);
+      color: #1a3a6b; font-weight: 600;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), 0 1px 2px rgba(0,0,0,0.15);
+      transition: filter 0.15s;
+    }
+    .vista-btn:hover { filter: brightness(1.08); }
+    .vista-btn-primary {
+      border-color: #1a3a6b;
+      background: linear-gradient(180deg, #4a90d9 0%, #2a6bbf 50%, #1a52a0 51%, #2a70cc 100%);
+      color: white;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 1px 2px rgba(0,0,0,0.3);
+    }
+
+    /* ── CONTEXT MENU ── */
+    .custom-context-menu {
+      display: none; position: fixed; z-index: 99999;
+      background-color: #fffef0;
+      border: 1.5px solid #000; border-radius: 4px;
+      min-width: 185px;
+      box-shadow: 3px 3px 0 #000;
+      font-family: 'DM Sans', sans-serif;
+      overflow: hidden;
+    }
+    .custom-context-menu a {
+      display: block; padding: 11px 15px;
+      text-decoration: none; color: #111;
+      font-weight: 600; font-size: 13.5px;
+      border-bottom: 1px solid #e8e6d8;
+      transition: background 0.1s;
+    }
+    .custom-context-menu a:last-child { border-bottom: none; }
+    .custom-context-menu a:hover { background: #f0eedc; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--black); color: white; font-family: 'DM Sans', sans-serif; }
+    .footer-links h5 {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.8px;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .footer-links h5 a { color: var(--gold); text-decoration: none; transition: opacity 0.2s; }
+    .footer-links h5 a:hover { opacity: 0.8; }
+    .footer-links ul li { margin-bottom: 5px; }
+    .footer-links ul li a {
+      color: rgba(255,255,255,0.6); font-size: 12.5px;
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links ul li a:hover { color: var(--gold); }
+    footer hr { border-color: #2a2a2a; }
+    .footer-social a { font-size: 20px; transition: color 0.2s; }
+    .footer-social a:hover { color: var(--gold) !important; }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.4); }
+  </style>
+</head>
+
+<body>
+
+<!-- top banner -->
+<div class="top-banner">
+  <div class="top-banner-top">
+    <img src="nbeplogo.png" alt="NBEP Logo">
+    <img class="flag" src="usflag.png" alt="US Flag">
+    <p>This is an official site of the NBEP. A non-profit non-government organization.</p>
+    <a class="lnk-official-us-site" href="#" id="bannerToggle">Here's&nbsp;how&nbsp;you&nbsp;know</a>
+  </div>
+  <div class="top-banner-bottom" id="bannerExpand">
+    <div class="left">
+      <img src="https://www.fbi.gov/++theme++fbigov.theme/uswds-2.9.0/img/icon-dot-gov.svg" alt="">
+      <div>
+        <h5>Official websites use <b>.us</b></h5>
+        <p>A <b>.us</b> website belongs to an official organization in the United States.</p>
+      </div>
     </div>
+    <div class="right">
+      <img src="https://www.fbi.gov/++theme++fbigov.theme/uswds-2.9.0/img/icon-https.svg" alt="">
+      <div>
+        <h5>Secure websites use HTTPS</h5>
+        <p>A lock or <i>https://</i> means you've safely connected to the website. Share sensitive information only on official, secure websites.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <!-- toolbar -->
-    <div class="toolbar">
-      <div class="dropdown-logo">
-        <img src="nbeplogo.png" alt="menu">
-        <div class="dropdown-menu">
-          <a href="#">Home</a>
-          <a href="/wanted">Most Wanted</a>
-          <a href="/submit-a-tip">Report Crime</a>
-          <a href="/resources">Resources</a>
-          <a href="/contact-us">Contact</a>
-        </div>
+<!-- header -->
+<header>
+  <div class="container-fluid px-0">
+
+    <!-- mobile row -->
+    <div class="header-mobile-row">
+      <div>
+        <a class="text-white" data-bs-toggle="offcanvas" data-bs-target="#mobileNav" href="#" role="button">
+          <i class="fas fa-bars fa-lg"></i>
+        </a>
       </div>
-      <div class="toolbar-nav">
-        <a href="#">Home</a>
-        <a href="/wanted">Most Wanted</a>
-        <a href="/news">News</a>
-        <a href="/info">What We Investigate</a>
-      </div>
-      <div class="toolbar-search">
-        <div class="search-box">
-          <img src="searchicon.png" alt="search">
-          <input type="text" placeholder="Search" id="toolbarSearch">
-        </div>
+      <div class="header-mobile-fbi text-white">NBEP</div>
+      <div>
+        <a href="/@@search" class="text-white"><i class="fas fa-search"></i></a>
       </div>
     </div>
 
-    <!-- flex:1 pushes footer to bottom -->
-    <div style="flex: 1;">
-      <div class="home-banner">
-        <div class="home-banner-content">
-          <div class="home-banner-text">
-            <h2>National Bureau of Exploitation Protection</h2>
-            <h4>Non-profit Organization for Cyber Crime Reporting.</h4>
+    <!-- desktop row -->
+    <div class="header-top-row px-4">
+      <div class="d-flex justify-content-between align-items-center py-3 pb-0">
+        <a href="/"><img src="nbeplogo.png" alt="NBEP Logo" height="54"></a>
+        <div class="d-flex align-items-center gap-3">
+          <div class="social-icons d-none d-md-flex gap-3">
+            <a href="#" class="text-white"><i class="fab fa-square-youtube"></i></a>
+            <a href="#" class="text-white"><i class="fab fa-square-facebook"></i></a>
+            <a href="#" class="text-white"><i class="fab fa-square-x-twitter"></i></a>
+            <a href="#" class="text-white"><i class="fas fa-square-envelope"></i></a>
           </div>
-          <button id="homeBannerBtn" class="home-banner-button">What We Investigate</button>
-          <a href="/resources" class="home-banner-resources">Resources</a>
-        </div>
-      </div>
-
-      <div class="home-warn">
-        <div class="warn-icon">!</div>
-        <div>
-          <h3>Disclaimer:</h3>
-          <p>The National Bureau of Exploitation Protection is a non-government, non-profit organization dedicated to assisting with cyber crime reporting and awareness. If there is any emergency, call 911 or contact your local law enforcement agency. We act as a middle-man to upper the chance of investigation to a possible case.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- vista overlay & window -->
-    <div class="vista-overlay" id="vistaOverlay"></div>
-    <div class="vista-window" id="vistaHelp">
-      <div class="vista-titlebar">
-        <div class="vista-titlebar-left">
-          <div class="vista-titlebar-icon"></div>
-          <span class="vista-titlebar-text">NBEP Help Center</span>
-        </div>
-        <button class="vista-close" id="vistaClose">✕</button>
-      </div>
-      <div class="vista-body">
-        <div class="vista-content">
-          <div class="vista-content-header">
-            <div class="vista-content-icon">❔</div>
-            <div>
-              <div class="vista-content-title">NBEP Help Center</div>
-              <div class="vista-content-subtitle">National Bureau of Exploitation Protection</div>
+          <form role="search" action="/search" class="d-none d-md-block">
+            <div class="search-box">
+              <input type="text" name="q" id="toolbarSearch" placeholder="Search NBEP">
+              <button type="submit"><i class="fas fa-search"></i></button>
             </div>
-          </div>
-          <p>Welcome to the NBEP Help Center. This organization is a <strong>non-government, non-profit</strong> body dedicated to cyber crime reporting and public awareness.</p>
-          <p>Here is what you can do on this site:</p>
-          <ul>
-            <li>Browse the <strong>Most Wanted</strong> list</li>
-            <li>Submit an anonymous tip via <strong>Report Crime</strong></li>
-            <li>Read the latest <strong>News</strong> and updates</li>
-            <li>Learn <strong>What We Investigate</strong></li>
-            <li>Access <strong>Resources</strong> for victims</li>
+          </form>
+        </div>
+      </div>
+
+      <nav class="navbar navbar-dark px-0 pb-0">
+        <div class="d-flex align-items-center">
+          <a class="text-white me-2" data-bs-toggle="offcanvas" data-bs-target="#mobileNav" href="#" role="button">
+            <i class="fas fa-bars fa-lg"></i>
+          </a>
+          <div class="vr mx-3 my-1" style="min-height:1.75rem; background:rgba(255,255,255,0.25);"></div>
+          <ul class="navbar-nav d-flex flex-row">
+            <li class="nav-item"><a href="/" class="nav-link">HOME</a></li>
+            <li class="nav-item"><a href="/wanted" class="nav-link">MOST WANTED</a></li>
+            <li class="nav-item"><a href="/news" class="nav-link">NEWS</a></li>
+            <li class="nav-item"><a href="/info" class="nav-link">WHAT WE INVESTIGATE</a></li>
+            <li class="nav-item"><a href="/resources" class="nav-link">RESOURCES</a></li>
+            <li class="nav-item"><a href="/submit-a-tip" class="nav-link nav-link-tip">SUBMIT A TIP</a></li>
+            <li class="nav-item"><a href="/contact-us" class="nav-link">CONTACT</a></li>
           </ul>
-          <div class="home-warn" style="margin: 0;">
-            <div class="warn-icon">ℹ</div>
-            <div>
-              <h3>Info:</h3>
-              <p>This site does not involve any form of cookie logging, IP logging, etc. Your privacy matters, and we do nothing with any information of yours. You may view our resources as a form of proof and review code of our page.</p>
-            </div>
-          </div>
         </div>
-        <div class="vista-footer">
-          <button class="vista-btn" id="vistaCloseBtn">Close</button>
-          <button class="vista-btn vista-btn-primary" onclick="window.location.href='/resources'">View Resources</button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- offcanvas -->
+  <div class="offcanvas offcanvas-start bg-black" tabindex="-1" id="mobileNav" aria-labelledby="mobileNavLabel">
+    <div class="offcanvas-header border-bottom border-secondary">
+      <h5 class="offcanvas-title text-white" id="mobileNavLabel">
+        <img src="nbeplogo.png" alt="NBEP" height="32" class="me-2">Menu
+      </h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body text-white">
+      <form role="search" action="/search" class="mb-4">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control bg-dark text-white border-secondary" placeholder="Search NBEP">
+          <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
+        </div>
+      </form>
+      <div class="social-icons mb-4 d-flex justify-content-center gap-3">
+        <a href="#" class="text-white"><i class="fab fa-square-youtube fa-lg"></i></a>
+        <a href="#" class="text-white"><i class="fab fa-square-facebook fa-lg"></i></a>
+        <a href="#" class="text-white"><i class="fab fa-square-x-twitter fa-lg"></i></a>
+        <a href="#" class="text-white"><i class="fas fa-square-envelope fa-lg"></i></a>
+      </div>
+      <hr class="border-secondary">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a href="/" class="nav-link text-white">Home</a></li>
+        <li class="nav-item"><a href="/wanted" class="nav-link text-white">Most Wanted</a></li>
+        <li class="nav-item"><a href="/news" class="nav-link text-white">News</a></li>
+        <li class="nav-item"><a href="/info" class="nav-link text-white">What We Investigate</a></li>
+        <li class="nav-item"><a href="/resources" class="nav-link text-white">Resources</a></li>
+        <li class="nav-item"><a href="/submit-a-tip" class="nav-link text-warning">Submit a Tip</a></li>
+        <li class="nav-item"><a href="/contact-us" class="nav-link text-white">Contact Us</a></li>
+        <li class="nav-item"><a href="/careers" class="nav-link text-white">Volunteer / Careers</a></li>
+        <li class="nav-item"><a href="/admin-login" class="nav-link text-white">Admin Login</a></li>
+      </ul>
+      <hr class="border-secondary mt-4">
+      <div class="text-center py-3">
+        <img src="nbeplogo.png" alt="NBEP Logo" height="50">
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- hero -->
+<section class="hero-section position-relative">
+  <div class="hero-carousel">
+
+    <div class="hero-slide active" id="slide-1">
+      <div class="hero-image">
+        <img src="hero/mission-statement.jpg" alt="NBEP Mission Statement">
+        <div class="hero-overlay"></div>
+      </div>
+      <div class="hero-content">
+        <div class="container position-relative text-white">
+          <h2 class="text-uppercase">Mission Statement</h2>
+          <p class="lead">To protect exploitation victims and support cybercrime reporting across the nation.</p>
+          <a href="/info" class="hero-read-more">Learn More</a>
         </div>
       </div>
     </div>
 
-    <!-- leadership section -->
-    <div class="leadership-section">
-      <p class="leadership-text">Leadership | Mission | Volunteers</p>
-      <div class="leadership-images">
-        <div class="leader-box">
-          <img src="HDNoPfp.png" alt="Leader 1">
-          <p class="leader-name">Director Evan S.</p>
-        </div>
-        <div class="leader-box">
-          <img src="HDNoPfp.png" alt="Leader 2">
-          <p class="leader-name">No Co-Director Appointed</p>
-        </div>
-        <div class="leader-box">
-          <img src="HDNoPfp.png" alt="Leader 3">
-          <p class="leader-name">No Chief Appointed</p>
-        </div>
-        <div class="leader-box">
-          <img src="HDNoPfp.png" alt="Leader 4">
-          <p class="leader-name">No Chief Lieutenant 1 Appointed</p>
-        </div>
-        <div class="leader-box">
-          <img src="HDNoPfp.png" alt="Leader 5">
-          <p class="leader-name">No Chief Lieutenant 2 Appointed</p>
+    <div class="hero-slide" id="slide-2">
+      <div class="hero-image">
+        <img src="hero/most-wanted.jpg" alt="NBEP Most Wanted">
+        <div class="hero-overlay"></div>
+      </div>
+      <div class="hero-content">
+        <div class="container position-relative text-white">
+          <h2 class="text-uppercase">Most Wanted</h2>
+          <p class="lead">Help us identify and locate individuals wanted for exploitation-related crimes.</p>
+          <a href="/wanted" class="hero-read-more">View List</a>
         </div>
       </div>
     </div>
 
-    <!-- i want to section -->
-    <div class="actions-section">
-      <p class="actions-title">I Want To</p>
-      <div class="actions-buttons">
-        <div class="action-btn">
-          <img src="imagery/Apply.png" alt="Apply as a Volunteer">
-          <a href="/careers">Apply as a Volunteer</a>
-        </div>
-        <div class="action-btn">
-          <img src="imagery/submittip.png" alt="Submit a Tip">
-          <a href="/submit-a-tip">Submit a Tip</a>
-        </div>
-        <div class="action-btn">
-          <img src="imagery/contactus.png" alt="Contact the NBEP">
-          <a href="/contact-us">Contact the NBEP</a>
-        </div>
-        <div class="action-btn">
-          <img src="imagery/softwaregain.png" alt="Gain Access to NBEP Software">
-          <a href="/contact-us">Gain Access to NBEP Software</a>
+    <div class="hero-slide" id="slide-3">
+      <div class="hero-image">
+        <img src="hero/submit-tip.jpg" alt="Submit a Tip">
+        <div class="hero-overlay"></div>
+      </div>
+      <div class="hero-content">
+        <div class="container position-relative text-white">
+          <h2 class="text-uppercase">Submit a Tip</h2>
+          <p class="lead">If you have information about exploitation or cybercrime, report it anonymously to the NBEP.</p>
+          <a href="/submit-a-tip" class="hero-read-more">Submit Now</a>
         </div>
       </div>
     </div>
 
-    <!-- featured content section -->
-    <div class="leadership-section">
-      <p class="leadership-text">Featured Content</p>
-      <div class="folder-cards">
-        <div class="folder-card" onclick="window.location.href='/resources'">
-          <div class="folder-icon"><img src="folder.png" alt="folder icon"></div>
-          <div class="folder-label">Software Used</div>
-        </div>
-        <div class="folder-card" onclick="window.location.href='/resources'">
-          <div class="folder-icon"><img src="folder.png" alt="folder icon"></div>
-          <div class="folder-label">Coping</div>
-        </div>
-        <div class="folder-card" onclick="window.location.href='/resources'">
-          <div class="folder-icon"><img src="folder.png" alt="folder icon"></div>
-          <div class="folder-label">Consult Help</div>
+    <div class="hero-slide" id="slide-4">
+      <div class="hero-image">
+        <img src="hero/victim-resources.jpg" alt="Victim Resources">
+        <div class="hero-overlay"></div>
+      </div>
+      <div class="hero-content">
+        <div class="container position-relative text-white">
+          <h2 class="text-uppercase">Victim Resources</h2>
+          <p class="lead">Access coping guides, software tools, and consultation help for exploitation survivors.</p>
+          <a href="/resources" class="hero-read-more">View Resources</a>
         </div>
       </div>
     </div>
 
-    <!-- footer -->
-    <div class="footer">
-      <div class="footer-inner">
-        <div class="footer-links">
-          <div class="footer-row">
-            <a class="footer-btn" href="#">HOME</a>
-            <a class="footer-btn" href="/wanted">MOST WANTED</a>
-            <a class="footer-btn" href="/news">NEWS</a>
-            <a class="footer-btn" href="/info">WHAT WE INVESTIGATE</a>
-          </div>
-          <div class="footer-row">
-            <a class="footer-btn" href="/contact-us">CONTACT US</a>
-            <a class="footer-btn" href="#">OFFICES</a>
-            <a class="footer-btn" href="#">SOFTWARE</a>
-            <a class="footer-btn" href="#">DOCUMENTS</a>
-          </div>
-          <div class="footer-row">
-            <a class="footer-btn" href="#">ARCHIVES</a>
-            <a class="footer-btn" href="#">DIRECTORS ROSTER</a>
-            <a class="footer-btn" href="#">HELP</a>
-            <a class="footer-btn" href="#">ADMINISTRATIVE SERVICES</a>
-          </div>
-          <div class="footer-social">
-            <img src="youtube.png" alt="YouTube">
-            <img src="facebook.png" alt="Facebook">
-            <img src="atlassian.png" alt="Atlassian">
-            <img src="x.png" alt="X">
-          </div>
-          <div class="footer-text">
-            <p>NBEP&copy; 2026-2027. All rights reserved.</p>
+  </div>
+
+  <div class="hero-indicators position-absolute end-0 top-50 translate-middle-y me-3">
+    <div class="d-flex flex-column gap-2">
+      <button class="indicator active" data-slide="1" aria-label="Slide 1"></button>
+      <button class="indicator" data-slide="2" aria-label="Slide 2"></button>
+      <button class="indicator" data-slide="3" aria-label="Slide 3"></button>
+      <button class="indicator" data-slide="4" aria-label="Slide 4"></button>
+    </div>
+  </div>
+</section>
+
+<!-- disclaimer -->
+<div style="padding: 0 20px;">
+  <div class="home-warn">
+    <div class="warn-icon">!</div>
+    <div>
+      <h3>Disclaimer:</h3>
+      <p>The National Bureau of Exploitation Protection is a non-government, non-profit organization dedicated to assisting with cybercrime reporting and awareness. If there is any emergency, call 911 or contact your local law enforcement agency. We act as a liaison to increase the chance of investigation into a possible case.</p>
+    </div>
+  </div>
+</div>
+
+<!-- leadership -->
+<section class="leadership-section py-5">
+  <div class="container py-3">
+    <h2 class="text-center mb-4">Leadership | Mission | Volunteers</h2>
+    <div class="row d-flex justify-content-center row-gap-4">
+      <div class="col-lg-4 col-xxl-2 col-6">
+        <div class="card leadership-card h-100">
+          <img src="HDNoPfp.png" alt="Director Evan S." class="card-img-top">
+          <div class="card-overlay">
+            <h3>Director<br>Evan S.</h3>
           </div>
         </div>
-        <div class="footer-logo">
-          <img src="nbeplogo.png" class="footer-logo-img" alt="NBEP Logo">
-          <img src="nbep-text.png" class="footer-logo-img" alt="NBEP">
+      </div>
+      <div class="col-lg-4 col-xxl-2 col-6">
+        <div class="card leadership-card h-100">
+          <img src="HDNoPfp.png" alt="Co-Director" class="card-img-top">
+          <div class="card-overlay">
+            <h3>Co-Director<br><em>Vacant</em></h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-xxl-2 col-6">
+        <div class="card leadership-card h-100">
+          <img src="HDNoPfp.png" alt="Chief" class="card-img-top">
+          <div class="card-overlay">
+            <h3>Chief<br><em>Vacant</em></h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-xxl-2 col-6">
+        <div class="card leadership-card h-100">
+          <img src="HDNoPfp.png" alt="Chief Lieutenant 1" class="card-img-top">
+          <div class="card-overlay">
+            <h3>Chief Lieutenant I<br><em>Vacant</em></h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-xxl-2 col-6">
+        <div class="card leadership-card h-100">
+          <img src="HDNoPfp.png" alt="Chief Lieutenant 2" class="card-img-top">
+          <div class="card-overlay">
+            <h3>Chief Lieutenant II<br><em>Vacant</em></h3>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      console.log("Version: Lakewood I.168");
+<!-- i want to -->
+<section class="i-want-to-section py-5 text-white">
+  <div class="container">
+    <h2 class="text-center mb-4">I Want To</h2>
+    <div class="g-4 text-center d-flex justify-content-center flex-wrap gap-2">
+      <div class="col-6 col-md-3 col-lg-2 col-xl">
+        <div class="quick-link">
+          <div class="icon-container mb-3">
+            <a href="/careers"><img src="imagery/Apply.png" alt="Apply as a Volunteer"></a>
+          </div>
+          <h6><a href="/careers">Apply as a Volunteer</a></h6>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 col-lg-2 col-xl">
+        <div class="quick-link">
+          <div class="icon-container mb-3">
+            <a href="/submit-a-tip"><img src="imagery/submittip.png" alt="Submit a Tip"></a>
+          </div>
+          <h6><a href="/submit-a-tip">Submit a Tip</a></h6>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 col-lg-2 col-xl">
+        <div class="quick-link">
+          <div class="icon-container mb-3">
+            <a href="/wanted"><img src="imagery/wanted.png" alt="Help Find Suspects"></a>
+          </div>
+          <h6><a href="/wanted">Help Find Suspects</a></h6>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 col-lg-2 col-xl">
+        <div class="quick-link">
+          <div class="icon-container mb-3">
+            <a href="/contact-us"><img src="imagery/contactus.png" alt="Contact the NBEP"></a>
+          </div>
+          <h6><a href="/contact-us">Contact the NBEP</a></h6>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 col-lg-2 col-xl">
+        <div class="quick-link">
+          <div class="icon-container mb-3">
+            <a href="/resources"><img src="imagery/resources.png" alt="Find Resources"></a>
+          </div>
+          <h6><a href="/resources">Find Resources</a></h6>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 col-lg-2 col-xl">
+        <div class="quick-link">
+          <div class="icon-container mb-3">
+            <a href="/info"><img src="imagery/investigate.png" alt="Learn What We Investigate"></a>
+          </div>
+          <h6><a href="/info">Learn What We Investigate</a></h6>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 col-lg-2 col-xl">
+        <div class="quick-link">
+          <div class="icon-container mb-3">
+            <a href="/contact-us"><img src="imagery/softwaregain.png" alt="Gain Access to NBEP Software"></a>
+          </div>
+          <h6><a href="/contact-us">Gain Access to NBEP Software</a></h6>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 col-lg-2 col-xl">
+        <div class="quick-link">
+          <div class="icon-container mb-3">
+            <a href="/news"><img src="imagery/news.png" alt="Read Latest News"></a>
+          </div>
+          <h6><a href="/news">Read Latest News</a></h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      const hbBtn = document.getElementById("homeBannerBtn");
-      hbBtn.onclick = function() {
-        window.location.href = "/info";
-      }
+<!-- featured content -->
+<section class="featured-content-section py-5">
+  <div class="container py-3">
+    <h2 class="text-center mb-4">Featured Content</h2>
+    <div class="row g-4">
+      <div class="col-lg-3 col-sm-6">
+        <a href="/news" class="text-decoration-none">
+          <div class="card featured-card h-100">
+            <img src="featured/news.png" alt="News" class="card-img-top">
+            <div class="card-overlay"><h3>News</h3></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <a href="/resources" class="text-decoration-none">
+          <div class="card featured-card h-100">
+            <img src="featured/software.png" alt="Software Used" class="card-img-top">
+            <div class="card-overlay"><h3>Software Used</h3></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <a href="/info" class="text-decoration-none">
+          <div class="card featured-card h-100">
+            <img src="featured/investigate.png" alt="What We Investigate" class="card-img-top">
+            <div class="card-overlay"><h3>What We Investigate</h3></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <a href="/resources" class="text-decoration-none">
+          <div class="card featured-card h-100">
+            <img src="featured/coping.png" alt="Coping Resources" class="card-img-top">
+            <div class="card-overlay"><h3>Coping Resources</h3></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-      const contextMenu = document.createElement("div");
-      contextMenu.classList.add("custom-context-menu");
-      contextMenu.innerHTML = `
-        <a href="/resources">Resources</a>
-        <a href="#" id="contextHelp">Help</a>
-        <a href="/admin-login">Admin Login</a>
-        <a href="/info">What We Investigate</a>
-      `;
-      document.body.appendChild(contextMenu);
+<!-- vista overlay & window -->
+<div class="vista-overlay" id="vistaOverlay"></div>
+<div class="vista-window" id="vistaHelp">
+  <div class="vista-titlebar">
+    <div class="vista-titlebar-left">
+      <div class="vista-titlebar-icon"></div>
+      <span class="vista-titlebar-text">NBEP Help Center</span>
+    </div>
+    <button class="vista-close" id="vistaClose">✕</button>
+  </div>
+  <div class="vista-body">
+    <div class="vista-content">
+      <div class="vista-content-header">
+        <div class="vista-content-icon">❔</div>
+        <div>
+          <div class="vista-content-title">NBEP Help Center</div>
+          <div class="vista-content-subtitle">National Bureau of Exploitation Protection</div>
+        </div>
+      </div>
+      <p>Welcome to the NBEP Help Center. This organization is a <strong>non-government, non-profit</strong> body dedicated to cybercrime reporting and public awareness.</p>
+      <p>Here is what you can do on this site:</p>
+      <ul>
+        <li>Browse the <strong>Most Wanted</strong> list</li>
+        <li>Submit an anonymous tip via <strong>Submit a Tip</strong></li>
+        <li>Read the latest <strong>News</strong> and updates</li>
+        <li>Learn <strong>What We Investigate</strong></li>
+        <li>Access <strong>Resources</strong> for victims</li>
+      </ul>
+      <div class="home-warn" style="margin:0;">
+        <div class="warn-icon">ℹ</div>
+        <div>
+          <h3>Info:</h3>
+          <p>This site does not involve any form of cookie logging, IP logging, etc. Your privacy matters. You may view our resources as proof and review the code of our page.</p>
+        </div>
+      </div>
+    </div>
+    <div class="vista-footer">
+      <button class="vista-btn" id="vistaCloseBtn">Close</button>
+      <button class="vista-btn vista-btn-primary" onclick="window.location.href='/resources'">View Resources</button>
+    </div>
+  </div>
+</div>
 
-      document.getElementById("contextHelp").addEventListener("click", (e) => {
-        e.preventDefault();
-        contextMenu.style.display = "none";
-        openVista();
-      });
+<!-- footer -->
+<footer class="py-5">
+  <div class="container footer-links">
+    <div class="row g-4">
+      <div class="col-md-3">
+        <h5><a href="/wanted">Most Wanted</a></h5>
+        <ul class="list-unstyled">
+          <li><a href="/wanted">Fugitives</a></li>
+          <li><a href="/wanted">Exploitation Cases</a></li>
+          <li><a href="/wanted">Seeking Information</a></li>
+        </ul>
+        <h5 class="mt-4"><a href="/careers">Volunteer / Careers</a></h5>
+        <ul class="list-unstyled">
+          <li><a href="/submit-a-tip">Submit a Tip</a></li>
+          <li><a href="/news">News</a></li>
+          <li><a href="/resources">Resources</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h5><a href="/news">News</a></h5>
+        <ul class="list-unstyled">
+          <li><a href="/news">Stories</a></li>
+          <li><a href="/news">Press Releases</a></li>
+          <li><a href="/post-news">Post News</a></li>
+        </ul>
+        <h5 class="mt-4"><a href="/resources">How We Can Help You</a></h5>
+        <ul class="list-unstyled">
+          <li><a href="/resources">Victim Services</a></li>
+          <li><a href="/resources">Coping Guides</a></li>
+          <li><a href="/resources">Safety Resources</a></li>
+          <li><a href="/resources">Software Tools</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h5><a href="/info">What We Investigate</a></h5>
+        <ul class="list-unstyled">
+          <li><a href="/info">Cybercrime</a></li>
+          <li><a href="/info">Exploitation</a></li>
+          <li><a href="/info">Online Harassment</a></li>
+          <li><a href="/info">Identity Theft</a></li>
+          <li><a href="/info">Fraud</a></li>
+        </ul>
+        <h5 class="mt-4"><a href="/contact-us">About</a></h5>
+        <ul class="list-unstyled">
+          <li><a href="/contact-us">Leadership</a></li>
+          <li><a href="/contact-us">Mission</a></li>
+          <li><a href="/careers">Volunteer</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h5><a href="/contact-us">Contact Us</a></h5>
+        <ul class="list-unstyled">
+          <li><a href="/contact-us">Send a Message</a></li>
+          <li><a href="/submit-a-tip">Submit a Tip</a></li>
+          <li><a href="/contact-us">Administrative Services</a></li>
+        </ul>
+        <h5 class="mt-4">Additional Resources</h5>
+        <ul class="list-unstyled">
+          <li><a href="/resources">NBEP Resources</a></li>
+          <li><a href="https://sayroahm.github.io/nbep/howyouknow" target="_blank">How You Know</a></li>
+          <li><a href="/admin-login">Admin Login</a></li>
+          <li><a href="https://usa.gov" target="_blank">USA.gov</a></li>
+        </ul>
+      </div>
+    </div>
 
-      document.addEventListener("contextmenu", (e) => {
-        e.preventDefault();
-        contextMenu.style.display = "block";
-        const menuWidth  = contextMenu.offsetWidth;
-        const menuHeight = contextMenu.offsetHeight;
-        const winWidth   = window.innerWidth;
-        const winHeight  = window.innerHeight;
-        contextMenu.style.left = (e.clientX + menuWidth  > winWidth)  ? (winWidth  - menuWidth  - 5) + "px" : e.clientX + "px";
-        contextMenu.style.top  = (e.clientY + menuHeight > winHeight) ? (winHeight - menuHeight - 5) + "px" : e.clientY + "px";
-      });
+    <hr class="my-4">
 
-      document.addEventListener("click",  () => { contextMenu.style.display = "none"; });
-      document.addEventListener("scroll", () => { contextMenu.style.display = "none"; });
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+      <div class="d-flex align-items-center gap-3">
+        <img src="nbeplogo.png" alt="NBEP Logo" height="56">
+        <img src="nbep-text.png" alt="NBEP" height="40" style="opacity:0.85;">
+      </div>
+      <p class="footer-copy mb-0 text-center">
+        NBEP&copy; 2026–2027. All rights reserved.<br>
+        National Bureau of Exploitation Protection — Non-profit, Non-government.
+      </p>
+      <div class="social-icons d-flex gap-3">
+        <a href="#" class="text-white"><i class="fab fa-square-youtube fa-lg"></i></a>
+        <a href="#" class="text-white"><i class="fab fa-square-facebook fa-lg"></i></a>
+        <a href="#" class="text-white"><i class="fab fa-square-x-twitter fa-lg"></i></a>
+        <a href="#" class="text-white"><i class="fas fa-square-envelope fa-lg"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
 
-      const vistaHelp     = document.getElementById("vistaHelp");
-      const vistaOverlay  = document.getElementById("vistaOverlay");
-      const vistaClose    = document.getElementById("vistaClose");
-      const vistaCloseBtn = document.getElementById("vistaCloseBtn");
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  console.log("Version: Lakewood I.168");
 
-      function openVista() {
-        vistaHelp.style.display   = "block";
-        vistaOverlay.style.display = "block";
-        requestAnimationFrame(() => vistaHelp.classList.add("open"));
-      }
+  const bannerToggle = document.getElementById("bannerToggle");
+  const bannerExpand = document.getElementById("bannerExpand");
+  bannerToggle.addEventListener("click", (e) => {
+    e.preventDefault();
+    bannerExpand.classList.toggle("open");
+  });
 
-      function closeVista() {
-        vistaHelp.classList.remove("open");
-        setTimeout(() => {
-          vistaHelp.style.display    = "none";
-          vistaOverlay.style.display = "none";
-        }, 180);
-      }
+  const contextMenu = document.createElement("div");
+  contextMenu.classList.add("custom-context-menu");
+  contextMenu.innerHTML = `
+    <a href="/resources">Resources</a>
+    <a href="#" id="contextHelp">Help</a>
+    <a href="/admin-login">Admin Login</a>
+    <a href="/info">What We Investigate</a>
+  `;
+  document.body.appendChild(contextMenu);
 
-      vistaClose.addEventListener("click",    closeVista);
-      vistaCloseBtn.addEventListener("click", closeVista);
-      vistaOverlay.addEventListener("click",  closeVista);
-    </script>
-  </body>
+  document.getElementById("contextHelp").addEventListener("click", (e) => {
+    e.preventDefault();
+    contextMenu.style.display = "none";
+    openVista();
+  });
+
+  document.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+    contextMenu.style.display = "block";
+    const mw = contextMenu.offsetWidth, mh = contextMenu.offsetHeight;
+    const ww = window.innerWidth,       wh = window.innerHeight;
+    contextMenu.style.left = (e.clientX + mw > ww) ? (ww - mw - 5) + "px" : e.clientX + "px";
+    contextMenu.style.top  = (e.clientY + mh > wh) ? (wh - mh - 5) + "px" : e.clientY + "px";
+  });
+  document.addEventListener("click",  () => { contextMenu.style.display = "none"; });
+  document.addEventListener("scroll", () => { contextMenu.style.display = "none"; });
+
+  const vistaHelp     = document.getElementById("vistaHelp");
+  const vistaOverlay  = document.getElementById("vistaOverlay");
+  const vistaClose    = document.getElementById("vistaClose");
+  const vistaCloseBtn = document.getElementById("vistaCloseBtn");
+
+  function openVista() {
+    vistaHelp.style.display    = "block";
+    vistaOverlay.style.display = "block";
+    requestAnimationFrame(() => vistaHelp.classList.add("open"));
+  }
+  function closeVista() {
+    vistaHelp.classList.remove("open");
+    setTimeout(() => {
+      vistaHelp.style.display    = "none";
+      vistaOverlay.style.display = "none";
+    }, 180);
+  }
+  vistaClose.addEventListener("click",    closeVista);
+  vistaCloseBtn.addEventListener("click", closeVista);
+  vistaOverlay.addEventListener("click",  closeVista);
+
+  const slides     = document.querySelectorAll(".hero-slide");
+  const indicators = document.querySelectorAll(".indicator");
+  let current = 0, timer;
+
+  function goToSlide(n) {
+    slides[current].classList.remove("active");
+    indicators[current].classList.remove("active");
+    current = n;
+    slides[current].classList.add("active");
+    indicators[current].classList.add("active");
+  }
+
+  function nextSlide() { goToSlide((current + 1) % slides.length); }
+
+  function startTimer() { timer = setInterval(nextSlide, 6000); }
+  function resetTimer()  { clearInterval(timer); startTimer(); }
+
+  indicators.forEach((btn, i) => {
+    btn.addEventListener("click", () => { goToSlide(i); resetTimer(); });
+  });
+
+  startTimer();
+</script>
+</body>
 </html>
