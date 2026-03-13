@@ -1,407 +1,394 @@
-<!doctype html>
-<html>
-  <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-59DEK49FXJ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-59DEK49FXJ');
-    </script>
-    <link rel="icon" type="image/x-icon" href="nbeplogo.png">
-    <title>NBEP-us.com | We'll Be Right Back</title>
-    <style>
-      html {
-        overflow-x: hidden;
-        max-width: 100%;
-      }
-      body {
-        margin: 0px;
-        background-color: #dbd9d3;
-        font-family: Arial;
-        overflow-x: hidden;
-        max-width: 100%;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-      * {
-        box-sizing: border-box;
-      }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/x-icon" href="nbeplogo.png">
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBEP — Service Unavailable</title>
 
-      /*  Banner  */
-      .banner {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        font-family: Arial, sans-serif;
-        background-color: white;
-      }
-      .banner img {
-        margin-left: 8px;
-        margin-right: 4px;
-        height: 1.36em;
-        width: auto;
-      }
-      .banner .img2 {
-        margin-left: 4px;
-        margin-right: 4px;
-        height: 1em;
-        width: 25px;
-      }
-      .banner p {
-        margin: 4px;
-        font-weight: 500;
-      }
-      .banner .p2 {
-        margin-left: 7px;
-        font-weight: 700;
-        text-decoration: underline;
-        color: #000000;
-      }
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-59DEK49FXJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-59DEK49FXJ');
+  </script>
+  <script src="console.js"></script>
 
-      /*  Toolbar  */
-      .toolbar {
-        background-color: #000000;
-        height: 70px;
-        display: flex;
-        align-items: center;
-        padding: 0 25px;
-        position: relative;
-        box-sizing: border-box;
-        width: 100%;
-      }
-      .dropdown-logo {
-        position: relative;
-      }
-      .dropdown-logo img {
-        height: 48px;
-        width: auto;
-        border: 2px solid white;
-        border-radius: 6px;
-        cursor: pointer;
-      }
-      .dropdown-menu {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background-color: white;
-        min-width: 200px;
-        border: 2px solid black;
-      }
-      .dropdown-menu a {
-        display: block;
-        padding: 12px 15px;
-        text-decoration: none;
-        color: black;
-        font-weight: 600;
-      }
-      .dropdown-menu a:hover {
-        background-color: #eeeeee;
-      }
-      .dropdown-logo:hover .dropdown-menu {
-        display: block;
-      }
-      .toolbar-nav {
-        display: flex;
-        gap: 60px;
-        margin-left: 60px;
-      }
-      .toolbar-nav a {
-        color: white;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 22px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        border-bottom: 2px solid transparent;
-        padding-bottom: 4px;
-        transition: color 0.25s ease, border-color 0.25s ease;
-      }
-      .toolbar-nav a:hover {
-        color: #ffd900;
-        border-bottom: 2px solid #ffd900;
-      }
-      .toolbar-search {
-        margin-left: auto;
-        margin-right: 10px;
-      }
-      .search-box {
-        display: flex;
-        align-items: center;
-        background: white;
-        border-radius: 20px;
-        padding: 6px 12px;
-        border: 1px solid #ccc;
-        transition: box-shadow 0.2s ease;
-      }
-      .search-box:focus-within {
-        box-shadow: 0 0 0 2px #ffd900;
-      }
-      .search-box img {
-        width: 16px;
-        height: 16px;
-        margin-right: 8px;
-        opacity: 0.7;
-      }
-      .search-box input {
-        border: none;
-        outline: none;
-        font-size: 14px;
-        width: 185px;
-        font-family: Arial, sans-serif;
-      }
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-      /*  Downtime Content Area  */
-      .downtime-wrapper {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 60px 40px;
-        max-width: 1100px;
-        margin: 0 auto;
-        width: 100%;
-        gap: 60px;
-      }
+  <style>
+    :root {
+      --navy: #1f2f5a;
+      --gold: #ffd900;
+      --cream: #dbd9d3;
+      --black: #0a0a0a;
+    }
 
-      /* Left: text block */
-      .downtime-text {
-        flex: 1;
-        min-width: 280px;
-        text-align: left;
-      }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { overflow-x: hidden; }
 
-      .downtime-divider {
-        border: none;
-        border-top: 1.5px solid #aaa;
-        margin-bottom: 22px;
-      }
+    body {
+      margin: 0;
+      background-color: var(--cream);
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
 
-      .downtime-title {
-        font-family: Arial, sans-serif;
-        font-size: 2.1rem;
-        font-weight: 700;
-        color: #111111;
-        margin: 0 0 18px 0;
-        letter-spacing: 0.3px;
-        line-height: 1.2;
-      }
+    /* ── TOP BANNER ── */
+    .top-banner {
+      width: 100%;
+      background: #ffffff;
+      border-bottom: 1px solid #e0ddd7;
+      font-size: 12.5px;
+    }
+    .top-banner-top {
+      padding: 5px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .top-banner-top img { height: 1.3em; width: auto; }
+    .top-banner-top .flag { height: 1em; width: 25px; }
+    .top-banner-top p { margin: 0; font-weight: 500; color: #333; }
+    .top-banner-top a {
+      margin-left: 5px;
+      font-weight: 700;
+      text-decoration: underline;
+      color: #000;
+      transition: color 0.2s;
+    }
+    .top-banner-top a:hover { color: var(--navy); }
+    .top-banner-bottom {
+      display: none;
+      padding: 10px 20px;
+      gap: 40px;
+      background: #f5f5f5;
+      border-top: 1px solid #ddd;
+    }
+    .top-banner-bottom.open { display: flex; }
+    .top-banner-bottom .left,
+    .top-banner-bottom .right { display: flex; align-items: flex-start; gap: 10px; flex: 1; }
+    .top-banner-bottom img { width: 32px; margin-top: 2px; }
+    .top-banner-bottom h5 { font-size: 13px; font-weight: 700; margin: 0 0 3px; }
+    .top-banner-bottom p { font-size: 12px; margin: 0; color: #444; }
 
-      .downtime-body {
-        font-family: Arial, sans-serif;
-        font-size: 0.97rem;
-        color: #333333;
-        line-height: 1.7;
-        margin: 0;
-        max-width: 480px;
-      }
+    /* ── HEADER ── */
+    header { background-color: var(--black); color: white; box-shadow: 0 2px 16px rgba(0,0,0,0.4); }
+    .header-mobile-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; }
+    @media (min-width: 992px) { .header-mobile-row { display: none; } }
+    .header-mobile-fbi { font-size: 22px; font-weight: 700; letter-spacing: 2px; }
+    .header-top-row { display: none; }
+    @media (min-width: 992px) { .header-top-row { display: block; } }
 
-      .downtime-body a {
-        color: #1a3aaf;
-        text-decoration: underline;
-        font-weight: 600;
-      }
+    .search-box { display: flex; align-items: center; }
+    .search-box input {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: white;
+      border-radius: 4px 0 0 4px;
+      font-size: 13px;
+      padding: 5px 10px;
+      outline: none;
+      font-family: Arial, sans-serif;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .search-box input::placeholder { color: rgba(255,255,255,0.5); }
+    .search-box input:focus { background: rgba(255,255,255,0.15); border-color: var(--gold); }
+    .search-box button {
+      border-radius: 0 4px 4px 0;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-left: none;
+      padding: 5px 10px;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      transition: background 0.2s;
+    }
+    .search-box button:hover { background: rgba(255,255,255,0.18); }
+    .social-icons a { font-size: 18px; transition: color 0.2s; }
+    .social-icons a:hover { color: var(--gold) !important; }
+    .navbar-dark .navbar-nav .nav-link {
+      color: rgba(255,255,255,0.85);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      padding: 10px 14px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .navbar-dark .navbar-nav .nav-link:hover { color: var(--gold); border-bottom-color: var(--gold); }
+    .nav-link-tip { color: var(--gold) !important; }
+    .offcanvas-body .nav-link { padding: 10px 4px; border-bottom: 1px solid #222; font-size: 14px; }
+    .offcanvas-body .nav-link:hover { color: var(--gold) !important; }
 
-      .downtime-body a:hover {
-        color: #ffd900;
-      }
+    /* ── MAIN ── */
+    .page-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 80px 60px;
+      gap: 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .content-left { flex: 1; }
+    .content-left hr { border: none; border-top: 1.5px solid #aaa; margin-bottom: 26px; }
+    .content-left h1 { font-size: 2.2rem; font-weight: 700; color: #111; margin: 0 0 18px; }
+    .content-left p { font-size: 0.95rem; color: #444; line-height: 1.75; margin: 0; max-width: 420px; }
+    .content-left p a { color: #1a3aaf; text-decoration: underline; font-weight: 600; }
+    .content-left p a:hover { color: var(--navy); }
+    .content-right { flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .content-right img { width: 320px; height: auto; object-fit: contain; filter: drop-shadow(0 4px 16px rgba(0,0,0,0.14)); }
 
-      /* Right: image */
-      .downtime-image {
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
+    @media (max-width: 720px) {
+      .page-body { flex-direction: column; padding: 48px 24px; gap: 40px; align-items: flex-start; }
+      .content-right img { width: 220px; }
+    }
 
-      .downtime-image img {
-        width: 320px;
-        height: auto;
-        object-fit: contain;
-        /* Slight drop shadow for depth, matching LinkedIn reference */
-        filter: drop-shadow(0px 4px 12px rgba(0,0,0,0.15));
-      }
+    /* ── FOOTER ── */
+    footer { background: var(--black); color: white; }
+    .footer-links h5 { font-size: 13px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .footer-links h5 a { color: var(--gold); text-decoration: none; transition: opacity 0.2s; }
+    .footer-links h5 a:hover { opacity: 0.8; }
+    .footer-links ul li { margin-bottom: 5px; }
+    .footer-links ul li a { color: rgba(255,255,255,0.6); font-size: 12.5px; text-decoration: none; transition: color 0.2s; }
+    .footer-links ul li a:hover { color: var(--gold); }
+    footer hr { border-color: #2a2a2a; }
+    .footer-social a { font-size: 20px; transition: color 0.2s; }
+    .footer-social a:hover { color: var(--gold) !important; }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.4); }
+  </style>
+</head>
+<body>
 
-      /*  Footer  */
-      .footer {
-        margin-top: auto;
-        background: black;
-        color: white;
-        width: 100%;
-        padding: 20px 0;
-        font-family: Arial, sans-serif;
-      }
-      .footer-inner {
-        width: 95%;
-        margin: auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-      }
-      .footer-links {
-        display: flex;
-        flex-direction: column;
-      }
-      .footer-row {
-        display: flex;
-        gap: 18px;
-        padding: 10px 0;
-        border-bottom: 1px solid #333;
-      }
-      .footer-row:last-child {
-        border-bottom: none;
-      }
-      .footer-btn {
-        text-decoration: none;
-        color: white;
-        font-size: 13px;
-        letter-spacing: .5px;
-        padding: 2px 4px;
-        transition: color .25s ease;
-      }
-      .footer-btn:hover {
-        color: #ffd900;
-      }
-      .footer-social {
-        margin-top: 12px;
-        display: flex;
-        gap: 10px;
-      }
-      .footer-social img {
-        height: 18px;
-        width: 18px;
-      }
-      .footer-logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .footer-logo-img {
-        height: 110px;
-        width: auto;
-      }
-      .footer-text {
-        font-family: Arial, sans-serif;
-        font-size: 15px;
-        color: white;
-      }
-
-      /*  Responsive  */
-      @media (max-width: 720px) {
-        .downtime-wrapper {
-          flex-direction: column;
-          align-items: flex-start;
-          padding: 40px 24px;
-          gap: 36px;
-        }
-        .downtime-image img {
-          width: 220px;
-        }
-        .toolbar-nav {
-          display: none;
-        }
-      }
-    </style>
-  </head>
-  <body>
-
-    <!-- Top Banner -->
-    <div class="banner">
-      <img src="nbeplogo.png" alt="logo">
-      <img class="img2" src="usflag.png" alt="usflag">
-      <p>This is an official site of the NBEP. A non-profit non-government organization.</p>
-      <a class="p2" href="https://sayroahm.github.io/nbep/howyouknow">?</a>
-    </div>
-
-    <!-- Toolbar -->
-    <div class="toolbar">
-      <div class="dropdown-logo">
-        <img src="nbeplogo.png" alt="menu">
-        <div class="dropdown-menu">
-          <a href="#">Home</a>
-          <a href="/wanted">Most Wanted</a>
-          <a href="/submit-a-tip">Report Crime</a>
-          <a href="/resources">Resources</a>
-          <a href="/contact-us">Contact</a>
-        </div>
-      </div>
-      <div class="toolbar-nav">
-        <a href="#">Home</a>
-        <a href="/wanted">Most Wanted</a>
-        <a href="/news">News</a>
-        <a href="/info">What We Investigate</a>
-      </div>
-      <div class="toolbar-search">
-        <div class="search-box">
-          <img src="searchicon.png" alt="search">
-          <input type="text" placeholder="Search" id="toolbarSearch">
-        </div>
+<!-- top banner -->
+<div class="top-banner">
+  <div class="top-banner-top">
+    <img src="nbeplogo.png" alt="NBEP Logo">
+    <img class="flag" src="usflag.png" alt="US Flag">
+    <p>This is an official site of the NBEP. A non-profit non-government organization.</p>
+    <a href="#" id="bannerToggle">Here's&nbsp;how&nbsp;you&nbsp;know</a>
+  </div>
+  <div class="top-banner-bottom" id="bannerExpand">
+    <div class="left">
+      <img src="https://www.fbi.gov/++theme++fbigov.theme/uswds-2.9.0/img/icon-dot-gov.svg" alt="">
+      <div>
+        <h5>Official NBEP websites use <b>-us.com</b></h5>
+        <p>A <b>-us.com</b> website belongs to an official United States NBEP site.</p>
       </div>
     </div>
-
-    <!-- Downtime Content -->
-    <div class="downtime-wrapper">
-
-      <!-- Left: Text -->
-      <div class="downtime-text">
-        <hr class="downtime-divider">
-        <h1 class="downtime-title">We'll Be Right Back</h1>
-        <p class="downtime-body">
-          There appears to have been a server issue, or maintenance is currently undergoing right now.
-          We will be right back with you. For now, please contact our email,
-          <a href="mailto:nbeporganizationgmail@gmail.com">nbeporganizationgmail@gmail.com</a>
-          regarding any tips. For more information about this outage, please check the news article
-          that will be provided after this outage.
-        </p>
-      </div>
-
-      <!-- Right: Image -->
-      <div class="downtime-image">
-        <img src="https://img.nbep-us.com/downtime/image.png" alt="NBEP Downtime Illustration">
-      </div>
-
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-      <div class="footer-inner">
-        <div class="footer-links">
-          <div class="footer-row">
-            <a class="footer-btn"><span>HOME</span></a>
-            <a class="footer-btn"><span>MOST WANTED</span></a>
-            <a class="footer-btn"><span>NEWS</span></a>
-            <a class="footer-btn"><span>WHAT WE INVESTIGATE</span></a>
-          </div>
-          <div class="footer-row">
-            <a class="footer-btn"><span>CONTACT US</span></a>
-            <a class="footer-btn"><span>OFFICES</span></a>
-            <a class="footer-btn"><span>SOFTWARE</span></a>
-            <a class="footer-btn"><span>DOCUMENTS</span></a>
-          </div>
-          <div class="footer-row">
-            <a class="footer-btn"><span>ARCHIVES</span></a>
-            <a class="footer-btn"><span>DIRECTORS ROSTER</span></a>
-            <a class="footer-btn"><span>HELP</span></a>
-            <a class="footer-btn"><span>ADMINISTRATIVE SERVICES</span></a>
-          </div>
-          <div class="footer-social">
-            <img src="youtube.png">
-            <img src="facebook.png">
-            <img src="atlassian.png">
-            <img src="x.png">
-          </div>
-          <div class="footer-text">
-            <p>NBEP&copy; 2026-2027. All rights reserved.</p>
-          </div>
-        </div>
-        <div class="footer-logo">
-          <img src="nbeplogo.png" class="footer-logo-img">
-          <img src="nbep-text.png" class="footer-logo-img">
-        </div>
+    <div class="right">
+      <img src="https://www.fbi.gov/++theme++fbigov.theme/uswds-2.9.0/img/icon-https.svg" alt="">
+      <div>
+        <h5>Secure websites use HTTPS</h5>
+        <p>A lock or <i>https://</i> means you've safely connected to the website. Share sensitive information only on official, secure websites.</p>
       </div>
     </div>
+  </div>
+</div>
 
-  </body>
+<!-- header -->
+<header>
+  <div class="container-fluid px-0">
+    <div class="header-mobile-row">
+      <a class="text-white" data-bs-toggle="offcanvas" data-bs-target="#mobileNav" href="#" role="button">
+        <i class="fas fa-bars fa-lg"></i>
+      </a>
+      <div class="header-mobile-fbi text-white">NBEP</div>
+      <a href="/@@search" class="text-white"><i class="fas fa-search"></i></a>
+    </div>
+    <div class="header-top-row px-4">
+      <div class="d-flex justify-content-between align-items-center py-3 pb-0">
+        <a href="/"><img src="nbeplogo.png" alt="NBEP Logo" height="54"></a>
+        <div class="d-flex align-items-center gap-3">
+          <div class="social-icons d-none d-md-flex gap-3">
+            <a href="#" class="text-white"><i class="fab fa-square-youtube"></i></a>
+            <a href="#" class="text-white"><i class="fab fa-square-facebook"></i></a>
+            <a href="#" class="text-white"><i class="fab fa-square-x-twitter"></i></a>
+            <a href="#" class="text-white"><i class="fas fa-square-envelope"></i></a>
+          </div>
+          <form role="search" action="/search" class="d-none d-md-block">
+            <div class="search-box">
+              <input type="text" name="q" placeholder="Search NBEP">
+              <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <nav class="navbar navbar-dark px-0 pb-0">
+        <div class="d-flex align-items-center">
+          <a class="text-white me-2" data-bs-toggle="offcanvas" data-bs-target="#mobileNav" href="#" role="button">
+            <i class="fas fa-bars fa-lg"></i>
+          </a>
+          <div class="vr mx-3 my-1" style="min-height:1.75rem;background:rgba(255,255,255,0.25);"></div>
+          <ul class="navbar-nav d-flex flex-row">
+            <li class="nav-item"><a href="/" class="nav-link">HOME</a></li>
+            <li class="nav-item"><a href="/wanted" class="nav-link">MOST WANTED</a></li>
+            <li class="nav-item"><a href="/news" class="nav-link">NEWS</a></li>
+            <li class="nav-item"><a href="/info" class="nav-link">WHAT WE INVESTIGATE</a></li>
+            <li class="nav-item"><a href="/resources" class="nav-link">RESOURCES</a></li>
+            <li class="nav-item"><a href="/submit-a-tip" class="nav-link nav-link-tip">SUBMIT A TIP</a></li>
+            <li class="nav-item"><a href="/contact-us" class="nav-link">CONTACT</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <div class="offcanvas offcanvas-start bg-black" tabindex="-1" id="mobileNav" aria-labelledby="mobileNavLabel">
+    <div class="offcanvas-header border-bottom border-secondary">
+      <h5 class="offcanvas-title text-white" id="mobileNavLabel">
+        <img src="nbeplogo.png" alt="NBEP" height="32" class="me-2">Menu
+      </h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body text-white">
+      <form role="search" action="/search" class="mb-4">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control bg-dark text-white border-secondary" placeholder="Search NBEP" style="font-family:Arial,sans-serif;">
+          <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
+        </div>
+      </form>
+      <div class="social-icons mb-4 d-flex justify-content-center gap-3">
+        <a href="#" class="text-white"><i class="fab fa-square-youtube fa-lg"></i></a>
+        <a href="#" class="text-white"><i class="fab fa-square-facebook fa-lg"></i></a>
+        <a href="#" class="text-white"><i class="fab fa-square-x-twitter fa-lg"></i></a>
+        <a href="#" class="text-white"><i class="fas fa-square-envelope fa-lg"></i></a>
+      </div>
+      <hr class="border-secondary">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a href="/" class="nav-link text-white">Home</a></li>
+        <li class="nav-item"><a href="/wanted" class="nav-link text-white">Most Wanted</a></li>
+        <li class="nav-item"><a href="/news" class="nav-link text-white">News</a></li>
+        <li class="nav-item"><a href="/info" class="nav-link text-white">What We Investigate</a></li>
+        <li class="nav-item"><a href="/resources" class="nav-link text-white">Resources</a></li>
+        <li class="nav-item"><a href="/submit-a-tip" class="nav-link text-warning">Submit a Tip</a></li>
+        <li class="nav-item"><a href="/contact-us" class="nav-link text-white">Contact Us</a></li>
+        <li class="nav-item"><a href="/careers" class="nav-link text-white">Volunteer / Careers</a></li>
+        <li class="nav-item"><a href="/admin-login" class="nav-link text-white">Admin Login</a></li>
+      </ul>
+      <hr class="border-secondary mt-4">
+      <div class="text-center py-3"><img src="nbeplogo.png" alt="NBEP Logo" height="50"></div>
+    </div>
+  </div>
+</header>
+
+<!-- main content -->
+<div class="page-body">
+  <div class="content-left">
+    <hr>
+    <h1>We'll Be Right Back</h1>
+    <p>
+      There appears to have been a server issue, or maintenance is currently undergoing right now.
+      We will be right back with you. For now, please contact our email,
+      <a href="mailto:nbeporganizationgmail@gmail.com">nbeporganizationgmail@gmail.com</a>
+      regarding any tips. For more information about this outage, please check the news article
+      that will be provided after this outage.
+    </p>
+  </div>
+  <div class="content-right">
+    <img src="https://img.nbep-us.com/downtime/image.png" alt="NBEP Downtime">
+  </div>
+</div>
+
+<!-- footer -->
+<footer class="py-5">
+  <div class="container footer-links">
+    <div class="row g-4">
+      <div class="col-md-3">
+        <h5><a href="/wanted">Most Wanted</a></h5>
+        <ul class="list-unstyled">
+          <li><a href="/wanted">Fugitives</a></li>
+          <li><a href="/wanted">Exploitation Cases</a></li>
+          <li><a href="/wanted">Seeking Information</a></li>
+        </ul>
+        <h5 class="mt-4"><a href="/careers">Volunteer / Careers</a></h5>
+        <ul class="list-unstyled">
+          <li><a href="/submit-a-tip">Submit a Tip</a></li>
+          <li><a href="/news">News</a></li>
+          <li><a href="/resources">Resources</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h5><a href="/news">News</a></h5>
+        <ul class="list-unstyled">
+          <li><a href="/news">Stories</a></li>
+          <li><a href="/news">Press Releases</a></li>
+          <li><a href="/post-news">Post News</a></li>
+        </ul>
+        <h5 class="mt-4"><a href="/resources">How We Can Help You</a></h5>
+        <ul class="list-unstyled">
+          <li><a href="/resources">Victim Services</a></li>
+          <li><a href="/resources">Coping Guides</a></li>
+          <li><a href="/resources">Safety Resources</a></li>
+          <li><a href="/resources">Software Tools</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h5><a href="/info">What We Investigate</a></h5>
+        <ul class="list-unstyled">
+          <li><a href="/info">Cybercrime</a></li>
+          <li><a href="/info">Exploitation</a></li>
+          <li><a href="/info">Online Harassment</a></li>
+          <li><a href="/info">Identity Theft</a></li>
+          <li><a href="/info">Fraud</a></li>
+        </ul>
+        <h5 class="mt-4"><a href="/contact-us">About</a></h5>
+        <ul class="list-unstyled">
+          <li><a href="/contact-us">Leadership</a></li>
+          <li><a href="/contact-us">Mission</a></li>
+          <li><a href="/careers">Volunteer</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h5><a href="/contact-us">Contact Us</a></h5>
+        <ul class="list-unstyled">
+          <li><a href="/contact-us">Send a Message</a></li>
+          <li><a href="/submit-a-tip">Submit a Tip</a></li>
+          <li><a href="/contact-us">Administrative Services</a></li>
+        </ul>
+        <h5 class="mt-4">Additional Resources</h5>
+        <ul class="list-unstyled">
+          <li><a href="/resources">NBEP Resources</a></li>
+          <li><a href="https://sayroahm.github.io/nbep/howyouknow" target="_blank">How You Know</a></li>
+          <li><a href="/admin-login">Admin Login</a></li>
+          <li><a href="https://usa.gov" target="_blank">USA.gov</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="my-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+      <div class="d-flex align-items-center gap-3">
+        <img src="nbeplogo.png" alt="NBEP Logo" height="56">
+        <img src="nbep-text.png" alt="NBEP" height="40" style="opacity:0.85;">
+      </div>
+      <p class="footer-copy mb-0 text-center">
+        NBEP&copy; 2026–2027. All rights reserved.<br>
+        National Bureau of Exploitation Protection — Non-profit, Non-government.
+      </p>
+      <div class="footer-social d-flex gap-3">
+        <a href="#" class="text-white"><i class="fab fa-square-youtube fa-lg"></i></a>
+        <a href="#" class="text-white"><i class="fab fa-square-facebook fa-lg"></i></a>
+        <a href="#" class="text-white"><i class="fab fa-square-x-twitter fa-lg"></i></a>
+        <a href="#" class="text-white"><i class="fas fa-square-envelope fa-lg"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  console.log("Version: Lakewood I.168");
+  document.getElementById("bannerToggle").addEventListener("click", (e) => {
+    e.preventDefault();
+    document.getElementById("bannerExpand").classList.toggle("open");
+  });
+</script>
+</body>
 </html>
